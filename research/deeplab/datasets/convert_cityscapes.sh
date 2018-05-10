@@ -50,6 +50,6 @@ mkdir -p "${OUTPUT_DIR}"
 BUILD_SCRIPT="${WORK_DIR}/build_cityscapes_data.py"
 
 echo "Converting Cityscapes dataset..."
-python "${BUILD_SCRIPT}" \
+python3 "${BUILD_SCRIPT}" \
   --cityscapes_root="${CITYSCAPES_ROOT}" \
   --output_dir="${OUTPUT_DIR}" \

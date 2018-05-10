@@ -16,6 +16,9 @@
 """Tests for DeepLab model and some helper functions."""
 
 import tensorflow as tf
+import sys
+import os
+sys.path.insert(0, os.getcwd() + '/../')
 
 from deeplab import common
 from deeplab import model

@@ -154,10 +154,12 @@ def _convert_dataset(dataset_split):
             i + 1, num_images, shard_id))
         sys.stdout.flush()
         # Read the image.
-        image_data = tf.gfile.FastGFile(image_files[i], 'r').read()
+        #print(image_files[i])
+        image_data = tf.gfile.FastGFile(image_files[i], 'rb').read()
         height, width = image_reader.read_image_dims(image_data)
         # Read the semantic segmentation annotation.
-        seg_data = tf.gfile.FastGFile(label_files[i], 'r').read()
+        print(label_files[i])
+        seg_data = tf.gfile.FastGFile(label_files[i], 'rb').read()
         seg_height, seg_width = label_reader.read_image_dims(seg_data)
         if height != seg_height or width != seg_width:
           raise RuntimeError('Shape mismatched between image and label.')
@@ -166,8 +168,9 @@ def _convert_dataset(dataset_split):
         if re_match is None:
           raise RuntimeError('Invalid image filename: ' + image_files[i])
         filename = os.path.basename(re_match.group(1))
+        #print(seg_data)
         example = build_data.image_seg_to_tfexample(
-            image_data, filename, height, width, seg_data)
+            image_data, bytes(filename, 'ascii'), height, width, seg_data)
         tfrecord_writer.write(example.SerializeToString())
     sys.stdout.write('\n')
     sys.stdout.flush()

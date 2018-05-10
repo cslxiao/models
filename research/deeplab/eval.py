@@ -19,6 +19,12 @@ See model.py for more details and usage.
 
 import math
 import tensorflow as tf
+
+import sys
+import os
+sys.path.insert(0, os.getcwd() + '/../')
+
+
 from deeplab import common
 from deeplab import model
 from deeplab.datasets import segmentation_dataset
